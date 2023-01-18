@@ -50,10 +50,22 @@ class Page2 extends StatelessWidget {
         // 화면 최상단으로 이동
         const end = Offset.zero;
 
+        const curve = Curves.ease;
+        final curveTween = CurveTween(curve: curve);
+
         // 중간 프레임의 offset 값 생성 Tween
-        final tween = Tween(begin: begin, end: end);
+        final tween = Tween(begin: begin, end: end).chain(curveTween);
         // 현재 animation 밸류에 맞춰서 중간값 계산.
         final offsetAnimation = animation.drive(tween);
+
+        // 위와 동일하지만 [CurvedAnimation]을 사용
+        // final curvedAnimation = CurvedAnimation(
+        //   parent: animation,
+        //   curve: curve,
+        // );
+        // final offsetAnimation = Tween(begin: begin, end: end)
+        //     .animate(curvedAnimation);
+
         return SlideTransition(
           position: offsetAnimation,
           child: child,
