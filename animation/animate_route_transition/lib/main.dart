@@ -44,8 +44,21 @@ class Page2 extends StatelessWidget {
   static Route _createRoute() {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => const Page2(),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-          child,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        // 화면 최하단부에서 시작
+        const begin = Offset(0.0, 1.0);
+        // 화면 최상단으로 이동
+        const end = Offset.zero;
+
+        // 중간 프레임의 offset 값 생성 Tween
+        final tween = Tween(begin: begin, end: end);
+        // 현재 animation 밸류에 맞춰서 중간값 계산.
+        final offsetAnimation = animation.drive(tween);
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
     );
   }
 
