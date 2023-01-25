@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/physics.dart';
 
 void main() {
   runApp(const MaterialApp(home: PhysicsCardDragDemo()));
@@ -41,7 +42,6 @@ class _DraggableCardState extends State<DraggableCard>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
     );
 
     _controller.addListener(() {
@@ -57,7 +57,7 @@ class _DraggableCardState extends State<DraggableCard>
     super.dispose();
   }
 
-  void _runAnimation() {
+  void _runAnimation(pixelsPerSecond, Size size) {
     _animation = _controller.drive(
       AlignmentTween(
         begin: _dragAlignment,
@@ -65,8 +65,19 @@ class _DraggableCardState extends State<DraggableCard>
       ),
     );
 
-    _controller.reset();
-    _controller.forward();
+    final unitsPerSecondx = pixelsPerSecond.dx / size.width;
+    final unitsPerSecondy = pixelsPerSecond.dy / size.height;
+    final unitsPerSecond = Offset(unitsPerSecondx, unitsPerSecondy);
+    final unitVelocity = unitsPerSecond.distance;
+
+    const spring = SpringDescription(
+      mass: 30,
+      stiffness: 1,
+      damping: 1,
+    );
+    final simulation = SpringSimulation(spring, 0, 1, -unitVelocity);
+
+    _controller.animateWith(simulation);
   }
 
   @override
@@ -84,7 +95,10 @@ class _DraggableCardState extends State<DraggableCard>
           );
         });
       },
-      onPanEnd: (details) => _runAnimation(),
+      onPanEnd: (details) => _runAnimation(
+        details.velocity.pixelsPerSecond,
+        size,
+      ),
       child: Align(
         alignment: _dragAlignment,
         child: Card(
