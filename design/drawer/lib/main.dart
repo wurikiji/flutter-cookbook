@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -30,18 +31,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      body: const SnackBarPage(),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -77,6 +71,26 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class SnackBarPage extends StatelessWidget {
+  const SnackBarPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: FilledButton(
+        onPressed: () {
+          final snackBar = SnackBar(
+            content: const Text("Yay! A SnackBar!"),
+            action: SnackBarAction(label: 'Done', onPressed: () {}),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        },
+        child: const Text("Show SnackBar"),
       ),
     );
   }
