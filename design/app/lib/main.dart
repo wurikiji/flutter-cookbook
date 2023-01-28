@@ -42,15 +42,31 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextStyle(
               fontFamily: 'Raleway',
               fontSize: 20,
-              package: 'awesome_fonts',
             ),
           ),
           Text(
             'Using the Raleway Italic font from the awesome_fonts',
             style: TextStyle(
-              fontFamily: 'packages/awesome_fonts/Raleway',
+              fontFamily: 'Raleway',
               fontSize: 20,
               fontStyle: FontStyle.italic,
+            ),
+          ),
+          Text(
+            'Using the Raleway Extrabold font',
+            style: TextStyle(
+              fontFamily: 'Raleway',
+              fontSize: 20,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          Text(
+            'Using the Raleway Extrabold font declared in awesome_fonts',
+            style: TextStyle(
+              fontFamily: 'Raleway',
+              package: 'awesome_fonts',
+              fontSize: 20,
+              fontWeight: FontWeight.w800,
             ),
           ),
           SnackBarPage(),
