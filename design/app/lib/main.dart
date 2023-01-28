@@ -1,3 +1,4 @@
+import 'package:drawer/orientation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -36,15 +37,15 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
-        children: const [
-          Text(
+        children: [
+          const Text(
             'Using the Raleway font from the awesome_fonts',
             style: TextStyle(
               fontFamily: 'Raleway',
               fontSize: 20,
             ),
           ),
-          Text(
+          const Text(
             'Using the Raleway Italic font from the awesome_fonts',
             style: TextStyle(
               fontFamily: 'Raleway',
@@ -52,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               fontStyle: FontStyle.italic,
             ),
           ),
-          Text(
+          const Text(
             'Using the Raleway Extrabold font',
             style: TextStyle(
               fontFamily: 'Raleway',
@@ -60,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
               fontWeight: FontWeight.w800,
             ),
           ),
-          Text(
+          const Text(
             'Using the Raleway Extrabold font declared in awesome_fonts',
             style: TextStyle(
               fontFamily: 'Raleway',
@@ -69,7 +70,19 @@ class _MyHomePageState extends State<MyHomePage> {
               fontWeight: FontWeight.w800,
             ),
           ),
-          SnackBarPage(),
+          const SnackBarPage(),
+          const SizedBox(height: 20),
+          FilledButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const OrientationBySizePage(),
+                ),
+              );
+            },
+            child: const Text("Go to Orientation By Size Page"),
+          ),
         ],
       ),
       drawer: Drawer(
