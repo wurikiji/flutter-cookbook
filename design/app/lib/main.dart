@@ -35,7 +35,27 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const SnackBarPage(),
+      body: Column(
+        children: const [
+          Text(
+            'Using the Raleway font from the awesome_fonts',
+            style: TextStyle(
+              fontFamily: 'Raleway',
+              fontSize: 20,
+              package: 'awesome_fonts',
+            ),
+          ),
+          Text(
+            'Using the Raleway Italic font from the awesome_fonts',
+            style: TextStyle(
+              fontFamily: 'packages/awesome_fonts/Raleway',
+              fontSize: 20,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+          SnackBarPage(),
+        ],
+      ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
