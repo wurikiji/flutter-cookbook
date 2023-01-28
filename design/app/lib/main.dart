@@ -11,12 +11,26 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final theme = ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.lightBlue[800],
+        textTheme: const TextTheme(
+          displayLarge: TextStyle(
+            fontSize: 72,
+            fontWeight: FontWeight.bold,
+          ),
+          titleLarge: TextStyle(
+            fontSize: 36,
+            fontStyle: FontStyle.italic,
+          ),
+          bodyMedium: TextStyle(
+            fontSize: 14,
+          ),
+        ),
+        useMaterial3: true);
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-      ),
+      theme: theme,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -72,16 +86,25 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           const SnackBarPage(),
           const SizedBox(height: 20),
-          FilledButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const OrientationPage(),
+          Theme(
+            data: Theme.of(context).copyWith(
+              filledButtonTheme: FilledButtonThemeData(
+                style: FilledButton.styleFrom(
+                  backgroundColor: Colors.orange,
                 ),
-              );
-            },
-            child: const Text("Go to Orientation By Size Page"),
+              ),
+            ),
+            child: FilledButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const OrientationPage(),
+                  ),
+                );
+              },
+              child: const Text("Go to Orientation By Size Page"),
+            ),
           ),
         ],
       ),

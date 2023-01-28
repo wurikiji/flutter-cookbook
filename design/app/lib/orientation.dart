@@ -15,8 +15,13 @@ class OrientationPage extends StatelessWidget {
             flex: 1,
             child: Column(
               children: [
-                const Text('''
+                Text(
+                  '''
 OrientationBuilder 
+''',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const Text('''
 Detect orientation by calculating the ratio of the width to the height of available space to the parent
 '''),
                 Expanded(
