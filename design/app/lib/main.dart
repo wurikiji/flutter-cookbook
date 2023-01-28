@@ -31,7 +31,62 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: theme,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text("Design Cookbook"),
+            bottom: const TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.directions_car)),
+                Tab(icon: Icon(Icons.directions_transit)),
+              ],
+            ),
+          ),
+          drawer: Drawer(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                const DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                  ),
+                  child: Text(
+                    'Drawer Header',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
+                  ),
+                ),
+                const ListTile(
+                  leading: Icon(Icons.message),
+                  title: Text('Messages'),
+                ),
+                const ListTile(
+                  leading: Icon(Icons.account_circle),
+                  title: Text('Profile'),
+                ),
+                const ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text('Settings'),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.exit_to_app),
+                  title: const Text('Close Drawer'),
+                  onTap: () => Navigator.pop(context),
+                ),
+              ],
+            ),
+          ),
+          body: const TabBarView(
+            children: [
+              MyHomePage(title: 'Flutter Demo Home Page'),
+              MyHomePage(title: 'Flutter Demo Home Page'),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -48,102 +103,63 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          const Text(
-            'Using the Raleway font from the awesome_fonts',
-            style: TextStyle(
-              fontFamily: 'Raleway',
-              fontSize: 20,
-            ),
+    return Column(
+      children: [
+        const Text(
+          'Using the Raleway font from the awesome_fonts',
+          style: TextStyle(
+            fontFamily: 'Raleway',
+            fontSize: 20,
           ),
-          const Text(
-            'Using the Raleway Italic font from the awesome_fonts',
-            style: TextStyle(
-              fontFamily: 'Raleway',
-              fontSize: 20,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
-          const Text(
-            'Using the Raleway Extrabold font',
-            style: TextStyle(
-              fontFamily: 'Raleway',
-              fontSize: 20,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          const Text(
-            'Using the Raleway Extrabold font declared in awesome_fonts',
-            style: TextStyle(
-              fontFamily: 'Raleway',
-              package: 'awesome_fonts',
-              fontSize: 20,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          const SnackBarPage(),
-          const SizedBox(height: 20),
-          Theme(
-            data: Theme.of(context).copyWith(
-              filledButtonTheme: FilledButtonThemeData(
-                style: FilledButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                ),
-              ),
-            ),
-            child: FilledButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const OrientationPage(),
-                  ),
-                );
-              },
-              child: const Text("Go to Orientation By Size Page"),
-            ),
-          ),
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Drawer Header',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            const ListTile(
-              leading: Icon(Icons.message),
-              title: Text('Messages'),
-            ),
-            const ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('Profile'),
-            ),
-            const ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
-            ),
-            ListTile(
-              leading: const Icon(Icons.exit_to_app),
-              title: const Text('Close Drawer'),
-              onTap: () => Navigator.pop(context),
-            ),
-          ],
         ),
-      ),
+        const Text(
+          'Using the Raleway Italic font from the awesome_fonts',
+          style: TextStyle(
+            fontFamily: 'Raleway',
+            fontSize: 20,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+        const Text(
+          'Using the Raleway Extrabold font',
+          style: TextStyle(
+            fontFamily: 'Raleway',
+            fontSize: 20,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        const Text(
+          'Using the Raleway Extrabold font declared in awesome_fonts',
+          style: TextStyle(
+            fontFamily: 'Raleway',
+            package: 'awesome_fonts',
+            fontSize: 20,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        const SnackBarPage(),
+        const SizedBox(height: 20),
+        Theme(
+          data: Theme.of(context).copyWith(
+            filledButtonTheme: FilledButtonThemeData(
+              style: FilledButton.styleFrom(
+                backgroundColor: Colors.orange,
+              ),
+            ),
+          ),
+          child: FilledButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const OrientationPage(),
+                ),
+              );
+            },
+            child: const Text("Go to Orientation By Size Page"),
+          ),
+        ),
+      ],
     );
   }
 }
