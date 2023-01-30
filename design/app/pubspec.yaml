@@ -58,6 +58,9 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  assets:
+    - packages/awesome_fonts/logo.png
+
   fonts:
     - family: Raleway
       fonts:

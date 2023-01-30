@@ -137,6 +137,13 @@ class _MyHomePageState extends State<MyHomePage> {
             fontWeight: FontWeight.w800,
           ),
         ),
+        Image.asset(
+          'packages/awesome_fonts/logo.png',
+        ),
+        Image.asset(
+          'logo.png',
+          package: 'awesome_fonts',
+        ),
         const SnackBarPage(),
         const SizedBox(height: 20),
         Theme(
